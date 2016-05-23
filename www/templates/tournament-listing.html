@@ -1,0 +1,48 @@
+<ion-view>
+    <ion-nav-title>
+        Tournaments
+    </ion-nav-title> 
+       <ion-nav-buttons side="right">   
+              <button class="button button-icon button-clear ion-cash bold">400</button> 
+                  <button class="button button-icon button-clear ion-funnel" ng-click="openTournamentFilter()"></button>
+                  
+    </ion-nav-buttons>
+    <ion-content>
+        <div class="tournament-wrapper">
+        <div class="cover-item-wrapper" ng-repeat="tournament in tournaments.catPost">
+            <a ui-sref="app.tournament-detail">
+                <div class="cover-item" style="background-image:url('{{::tournament.img}}')">
+                    <div class="cover-overlay">
+                        <div class="cover-input-about">
+                            <div class="cover-heading-text about-cover-text">
+                                <div class=" tournament-title"> {{::tournament.title}}</div>
+                                <div class="tournament-date">{{::tournament.start_date}} To {{::tournament.end_date}}</div>
+                                <div class="tournament-venue"> {{::tournament.venue}}</div>
+                                <div class="tournament-trade"> Total Points Traded So Far: {{::tournament.total_tour_bets}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </a>
+            </div> 
+        </div> 
+    </ion-content>
+</ion-view>
+<script id="templates/filter-tournament.html" type="text/ng-template">
+      <ion-popover-view>
+
+        <ion-content>
+        <span class="filter-head">
+      
+          
+ <ion-list>
+
+  <ion-checkbox  class="checkbox-cover">Show All</ion-checkbox>
+  <ion-checkbox  class="checkbox-cover">Cricket </ion-checkbox>
+  <ion-checkbox  class="checkbox-cover">Soccer</ion-checkbox> 
+  <ion-checkbox  class="checkbox-cover">Tennis</ion-checkbox>
+
+</ion-list> </span>
+        </ion-content>
+      </ion-popover-view>
+    </script>

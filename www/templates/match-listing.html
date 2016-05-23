@@ -1,0 +1,67 @@
+<ion-view>
+    <ion-nav-title>
+        Matches
+    </ion-nav-title>
+    <ion-subheader-bar class="bar bar-subheader">
+        <div class="button-bar">
+            <a class="item item-icon-right icon-sub radiuz-btn subheader-btn noradius" ng-click="categoryFilter()">
+                <i class="icon ion-android-more-vertical"></i> Cricket
+            </a>
+            <a class="item item-icon-right icon-sub radiuz-btn subheader-btn noradius" ng-class="subCategoryFilter()">
+                <i class="icon ion-android-more-vertical"></i> All Matches
+            </a>
+        </div>
+    </ion-subheader-bar>
+    <ion-content class="has-subheader">
+        <div class="mathes-wrapper">
+             <div class="celebrity-listing listing-listing">
+                <div class="list list-listing">
+                    <span class="card padding" ng-repeat="matche in matches.catPost">
+         
+ <h2 class="match-title fs20">{{::matche.title}}</h2> 
+  <p class="mt2">{{::matche.tournament_name.post_title}}</p> 
+      <p class="mt2">{{::matche.onlySDate}}, {{::matche.matchStartTime}} - {{::matche.matchEndTime}}</p> 
+      <p class="mt2">{{::matche.venue}}</p> 
+      <p class="mt2">Total Traded:  {{::matche.total_bets}}</p> 
+      <div class="row pl0">
+          <div class="col-60 pl0 user-trade">Your Trade: 120</div>
+          <div class="col-40 txt-right">
+          <button class="trade-btn radiuz-btn" ng-click="trade()">Add Trade</button>
+          </div>
+      </div>
+                </span> 
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+<script type="text/ng-template" id="templates/filter-match.html">
+    <ion-popover-view>
+        <ion-content>
+            <span class="filter-head"> 
+ <ion-list>
+
+  <ion-radio ng-model="choice" class="checkbox-cover">Show All</ion-radio>
+  <ion-radio ng-model="choice" class="checkbox-cover">Cricket </ion-radio>
+  <ion-radio ng-model="choice" class="checkbox-cover">Soccer</ion-radio> 
+  <ion-radio ng-model="choice" class="checkbox-cover">Tennis</ion-radio>
+
+</ion-list> </span>
+        </ion-content>
+    </ion-popover-view>
+</script>
+
+<script type="text/ng-template" id="templates/filter-match1.html">
+    <ion-popover-view>
+        <ion-content>
+            <span class="filter-head"> 
+ <ion-list>
+
+  <ion-radio ng-model="choice" class="checkbox-cover">Show All</ion-radio>
+  <ion-radio ng-model="choice" class="checkbox-cover">Popular Matches</ion-radio>  
+  <ion-radio ng-model="choice" class="checkbox-cover">Todays Matches </ion-radio>
+
+</ion-list> </span>
+        </ion-content>
+    </ion-popover-view>
+</script>

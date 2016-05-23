@@ -1,0 +1,54 @@
+<ion-view>
+    <ion-nav-title>
+        Gaming
+    </ion-nav-title>
+    <ion-subheader-bar class="bar bar-subheader">
+        <div class="button-bar">
+            <a class="button radiuz-btn subheader-btn noradius" ng-class="activePanel == 'Tournaments' ? 'tab-selected' : ''" ng-click="activePanel = 'Tournaments'">Popular Tournaments</a>
+            <a class="button radiuz-btn subheader-btn noradius" ng-class="activePanel == 'Matches' ? 'tab-selected' : ''" ng-click="activePanel = 'Matches'">Popular Matches</a>
+        </div>
+    </ion-subheader-bar>
+    <ion-content class="has-subheader">
+        <div class="tournament-wrapper" ng-show="activePanel == 'Tournaments'">
+            <div class="cover-item-wrapper" ng-repeat="tournament in featuredData.popularTournaments">
+            <a role="link" ng-href="{{getSegment(tournament.postLink)}}">
+                <div class="cover-item" style="background-image: url('{{::tournament.img}}')">
+                    <div class="cover-overlay">
+                        <div class="cover-input-about">
+                            <div class="cover-heading-text about-cover-text">
+                                <div class=" tournament-title">{{::tournament.title}}</div>
+                                <div class="tournament-date">{{::tournament.start_date}} to {{::tournament.onlyEDate}}</div>
+                                <div class="tournament-venue">{{::tournament.venue}}</div>
+                                <div class="tournament-trade"> Total Points Traded So Far: {{::tournament.total_tour_bets}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </a>
+            </div>  
+        </div>
+        <div class="mathes-wrapper" ng-show="activePanel == 'Matches'">
+            
+ 
+             <div class="celebrity-listing listing-listing">
+                <div class="list list-listing">
+                    <span class="card padding" ng-repeat="matches in featuredData.popularMatches">
+         
+ <h2 class="match-title fs20">{{::matches.title}}</h2> 
+ <!-- <p class="mt2">ICC T20 World Cup 2011</p> -->
+      <p class="mt2">{{::matches.start_date}}  to {{::matches.end_date}}</p> 
+      <p class="mt2">{{::matches.venue}}</p> 
+      <p class="mt2">Total Traded:  {{::matches.total_bets}}</p> 
+      <div class="row pl0">
+          <div class="col-60 pl0 user-trade">Your Trade: 120</div>
+          <div class="col-40 txt-right">
+          <button class="trade-btn radiuz-btn" ng-click="trade()">Add Trade</button>
+          </div>
+      </div>
+                </span> 
+                </div>
+            </div>
+       
+        </div>
+    </ion-content>
+</ion-view>

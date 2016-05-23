@@ -1,0 +1,84 @@
+<ion-view hide-menu-button="true">
+    <ion-nav-title>
+        My Trades
+    </ion-nav-title>
+    <ion-subheader-bar class="bar bar-subheader">
+        <div class="button-bar" ng-init="activeState = 'buy'">
+            <a class="button radiuz-btn subheader-btn noradius" ng-click="activeState = 'buy'">Buy Points</a>
+            <a class="button radiuz-btn subheader-btn noradius" ng-click="activeState = 'encash'">Encash Points</a>
+            <a class="button radiuz-btn subheader-btn noradius" ng-click="activeState = 'history'">Purches History</a>
+        </div>
+    </ion-subheader-bar>
+    <ion-content class="has-subheader">
+        <div ng-if="activeState == 'buy'">
+            <div class="wrapper padding">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat accusantium, numquam sint rem recusandae veritatis, alias veniam nobis minima molestiae eligendi doloremque, officia. Odio error eius animi, cumque? Et porro, labore unde obcaecati ab officiis.
+            </div>
+            <div class="buy-point-wrapper">
+                <form action="">
+                    <div class="list">
+                        
+                         <label class="item item-input item-stacked-label">
+    <span class="input-label">Buy Points</span>
+    <input type="text" placeholder="Enter points to buy">
+  </label>
+  <span class="item item-input item-stacked-label">
+    
+                        <button type="submit" class="button button-small mt25 button-block button-dark btn-login radiuz-btn">
+                        Buy Now 
+                    </button>
+    
+  </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div ng-if="activeState == 'encash'">
+            <div class="wrapper padding">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat accusantium, numquam sint rem recusandae veritatis, alias veniam nobis minima molestiae eligendi doloremque, officia. Odio error eius animi, cumque? Et porro, labore unde obcaecati ab officiis.
+            </div>
+            <div class="buy-point-wrapper">
+                  <form action="">
+                    <div class="list">
+                        
+                         <label class="item item-input item-stacked-label">
+    <span class="input-label">Encash Points</span>
+    <input type="text" placeholder="Enter points to Encash">
+  </label>
+  <span class="item item-input item-stacked-label">
+
+                        <button type="submit" class="button button-small mt25 button-block button-dark btn-login radiuz-btn">
+                        Encash Now 
+                    </button>
+                  </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="purches-history" ng-if="activeState == 'history'">
+           <div class="wrapper table">
+          <div class="row header">
+          <div class="col">Txn ID</div>
+          <div class="col">Purchased On</div>
+          <div class="col">Points Paid</div> 
+        </div>
+        <div class="row">
+          <div class="col">3454352</div>
+          <div class="col">05-Mar-2016</div>
+          <div class="col">102</div> 
+        </div>
+        <div class="row">
+          <div class="col">5235</div>
+          <div class="col">24-Apr-2016</div>
+          <div class="col">23</div> 
+        </div>
+        <div class="row">
+          <div class="col">234555</div>
+          <div class="col">09-Aug-2016</div>
+          <div class="col">677</div> 
+        </div>
+        
+        </div> 
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,54 @@
+<ion-view hide-menu-button="true">
+    <ion-nav-title>
+        Tri Series
+    </ion-nav-title>
+    <ion-content>
+        <div class="cover-item-wrapper cover-detail-wrapper">
+            <div class="cover-item cover-item-detail" style="background-image: url('{{tournament.details[0].img}}')">
+                <div class="cover-overlay"> 
+                    <div class="celeb-info-detail tournament-detail">
+                        <h2 class="mb0">{{::tournament.details[0].title}}</h2>
+                        <p class="mb0">{{::tournament.details[0].start_date}} to {{tournament.details[0].end_date}}</p>
+                        <p class="mb0">{{::tournament.details[0].venue}}</p>
+                        <p class="mb0"><a ng-click="openLink(tournament.details[0].website_link, $event)">{{::tournament.details[0].website_link}}</a></p>
+                        <h2 class="mb0 points-trade"> Total Points Traded So Far: {{::tournament.totalBets[0].total}}</h2>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    <div class="wrapper title-page"><h2>Team Participating</h2></div>
+
+        <div class="wrapper table">
+          <div class="row header">
+          <div class="col">Team</div>
+          <div class="col">Your Trade</div>
+          <div class="col">Action</div> 
+        </div>{{tournament.participating_team}}
+        <div class="row" ng-repeat="team in tournament.details[0].participating_team">
+          <div class="col">{{::team.team.post_title}}</div>
+          <div class="col">{{::tournament.pts[($index)][0].total}}</div>
+          <div class="col"><button class="trade-btn radiuz-btn" ng-click="trade()">Add Trade</button></div> 
+        </div> 
+        </div> 
+   <div class="wrapper title-page"><h2>Upcoming Matches</h2></div>
+  <div class="match-wrapper"> 
+             <div class="list list-listing">
+                    <span class="card padding" ng-repeat="matche in  tournament.matches.details">
+         
+ <h2 class="match-title fs20">{{::matche.title}}</h2> 
+  <p class="mt2">{{::matche.tournament_name.post_title}}</p> 
+      <p class="mt2">{{::matche.onlySDate}}, {{::matche.matchStartTime}} - {{::matche.matchEndTime}}</p> 
+      <p class="mt2">{{::matche.venue}}</p> 
+      <p class="mt2">Total Traded:  {{::matche.total_bets}}</p> 
+      <div class="row pl0">
+          <div class="col-60 pl0 user-trade">Your Trade: 120</div>
+          <div class="col-40 txt-right">
+          <button class="trade-btn radiuz-btn" ng-click="trade()">Add Trade</button>
+          </div>
+      </div>
+                </span> 
+                </div>
+            </div> 
+        </div>
+    </ion-content>
+</ion-view>

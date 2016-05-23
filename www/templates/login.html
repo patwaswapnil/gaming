@@ -1,0 +1,97 @@
+<ion-modal-view>
+      <ion-pane ng-show="showLogin">
+  <ion-header-bar class="bar bar-dark">
+    <h1 class="title">Login</h1>
+    <div class="buttons">
+        <button class="button button-icon button-clear ion-close-round"  ng-click="hide()" menu-toggle="right">
+        </button> 
+    </div>
+  </ion-header-bar>
+  <ion-content class="login-bg">
+      <div class="row">
+                <div class="col wrapper-logo txt-center">
+                    <!-- <img ng-src="img/logo.png" class="logo-login" alt=""> -->
+                </div>
+            </div>
+            <form class="margin30" ng-submit="authUser(userCred)">
+                <div class="list txt-center">
+                    <label class=""> 
+                         <input type="text" class="text-login" ng-model="userCred.userName"  placeholder="Username">
+                    </label>
+                    <label class=""> 
+                         <input type="password" class="text-login" ng-model="userCred.password" placeholder="Password">
+                    </label>
+                    <button type="submit" class="button button-small mt25 button-block button-dark btn-login radiuz-btn">
+                        Login 
+                    </button>
+                </div>
+            </form>
+          
+            <div class="wrapper-login-offer">
+                <div class="row login-pad ">
+                    <div class="col">
+                        <a class="white" ng-click="registerToggle()">
+                        Create Account 
+                    </a>
+                    </div>
+                    <div class="col txt-right">
+                        <a class="white" ng-click="resetPwd()">
+                        Forgot Password? 
+                    </a>
+                    </div>
+                </div>
+            </div>
+            <div class="txt-center or-text white">OR</div>
+            <div class="list txt-center">
+                <button class="button radiuz-btn icon-left ion-social-facebook facebook-background button-dark  facebook-sign-in" ng-click="facebookLogin()">LOG IN WITH FACEBOOK</button>
+            </div> 
+        </ion-content>
+   </ion-pane>
+    <!-- Register   -->
+    <ion-pane  ng-hide="showLogin"> 
+        <ion-header-bar class="bar-dark">
+            <div class="title">Register</div>
+            <div class="buttons">
+                 <button class="button button-icon button-clear ion-close-round"  ng-click="registerToggle()" menu-toggle="right">
+        </button> 
+            </div>
+        </ion-header-bar>
+        <ion-content class="login-bg" >
+        
+            <form class="margin30" ng-submit="registerUser(userRegister)">
+                <div class="list"> 
+                    <label class="item border-tn item-register item-input item-floating-label">
+                        <span class="input-label white">First Name</span>
+                        <input type="text" class="white transparent-label" ng-model="userRegister.first_name"  placeholder="Enter your  First Name">
+                    </label> 
+                    <label class="item item-register item-input item-floating-label">
+                        <span class="input-label white">Last Name</span>
+                        <input type="text" class="white transparent-label" ng-model="userRegister.last_name" placeholder="Enter your Last Name">
+                    </label> 
+                    <label class="item item-register item-input item-floating-label">
+                        <span class="input-label white">Email</span>
+                        <input type="email" class="white transparent-label" ng-model="userRegister.user_email" placeholder="Enter your Email">
+                    </label>
+                    <label class="item item-register item-input item-floating-label">
+                        <span class="input-label white">Username</span>
+                        <input type="text" class="white transparent-label" ng-model="userRegister.user_login" placeholder="Enter your Username">
+                    </label>
+                    <label class="item item-register item-input item-floating-label">
+                        <span class="input-label white">Contact Number</span>
+                        <input type="text" class="white transparent-label" ng-model="userRegister.phone" placeholder="Enter your Contact Number">
+                    </label>
+                    <label class="item item-register item-input item-floating-label">
+                        <span class="input-label white">Password</span>
+                        <input type="password" class="white transparent-label" ng-model="userRegister.user_pass" placeholder="Enter your password">
+                    </label>
+                    <div class="txt-center">
+                      
+             <button class="button button-small mt25 button-block button-dark btn-login radiuz-btn" type="submit">
+                        Register
+                    </button>
+                    </div>
+                </div>
+            </form>
+  </ion-content>
+  </ion-pane>
+</ion-modal-view>

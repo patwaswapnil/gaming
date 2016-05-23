@@ -1,0 +1,86 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-dark">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+             <ion-nav-buttons side="right">   
+                  <button class="button button-icon button-clear ion-cash bold">400</button>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+   <ion-side-menu side="left">
+<ion-header-bar class="expanded bar bar-header disable-user-behavior"  style="background-color: #444;"> 
+ 
+                  
+<span>
+            <div class="menu-option-bottom">
+            <div class=" ">
+             Hi, {{user.data.display_name | capitalize}}
+            </div>
+           <div class=""><p class="fz14 sidemenu-text"><span class="bold">400</span> Cleared points</p></div>
+           <div class=""><p class="fz14"><span class="bold">75 </span> Uncleared points</p></div>
+  </div>
+</span> 
+</ion-header-bar>
+
+    <ion-content class="stable-bg has-header has-expanded-header menu-content">
+      <ion-list class="menu-list">
+   <div class="list">
+
+  <a ui-sref="app.home"  nav-clear menu-close  class="item item-icon-left menu-item">
+    <i class="icon ion-chevron-right"></i>
+    Home
+  </a>
+ 
+  <a   nav-clear menu-close class="item item-icon-left menu-item" ui-sref="app.match-listing">
+    <i class="icon ion-chevron-right"></i>
+    Matches
+  </a>
+  <a nav-clear menu-close class="item item-icon-left menu-item" ui-sref="app.tournament-listing">
+    <i class="icon ion-chevron-right"></i>
+    Tournaments
+  </a>
+  <a nav-clear menu-close class="item item-icon-left menu-item" ui-sref="app.my-trades">
+    <i class="icon ion-chevron-right"></i>
+    My Trades
+  </a>
+  <a nav-clear menu-close class="item item-icon-left menu-item" ui-sref="app.buy-encash">
+    <i class="icon ion-chevron-right"></i>
+    Buy/Encash Points
+  </a>
+  <a nav-clear menu-close class="item item-icon-left menu-item" ui-sref="app.user-profile">
+    <i class="icon ion-chevron-right"></i>
+    Edit Profile
+  </a> 
+  <a nav-clear menu-close class="item item-icon-left menu-item" ui-sref="app.about">
+    <i class="icon ion-chevron-right"></i>
+    About
+  </a>
+
+  <a nav-clear menu-close class="item item-icon-left menu-item" ui-sref="app.contact">
+    <i class="icon ion-chevron-right"></i>
+    Contact
+  </a>
+  <a role="link" class="item item-icon-left menu-item" nav-clear menu-close ng-click="loginFromMenu()" ng-if="!isLoggedIn">
+    <i class="icon ion-chevron-right"></i>
+    Login
+  </a>
+  <a role="link" class="item item-icon-left menu-item" nav-clear menu-close ng-click="logout()" ng-if="isLoggedIn">
+    <i class="icon ion-chevron-right"></i>
+    Logout
+  </a>
+    
+
+</div>
+      </ion-list>
+ 
+ 
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

@@ -1,0 +1,39 @@
+<ion-view hide-menu-button="true">
+ <ion-nav-title>
+      Contact Us
+ </ion-nav-title>
+  <ion-content>
+     <span>
+        <h4 class="content  profile-head double-padding-x">Contact </h4>
+     
+   <form name="contact" ng-submit="sendMail(message)" id="contact">
+          <div class="list">
+  <label class="item item-input item-stacked-label">
+    <span class="input-label fz14"> Name*</span>
+    <input type="text" name="fname" required="required" ng-class="contact.fname.$touched && contact.fname.$invalid ? 'error-border' : ''" ng-model="message.fname" placeholder="Enter Name">
+  </label> 
+  <label class="item item-input item-stacked-label">
+    <span class="input-label fz14">Email*</span>
+    <input type="email" name="email" required="required" ng-class="contact.email.$touched && contact.email.$invalid ? 'error-border' : ''" ng-model="message.email" placeholder="Enter valid Email">
+  </label>
+  <label class="item item-input item-stacked-label">
+    <span class="input-label fz14">Mobile*</span>
+    <input type="text" name="phone" required="required" ng-class="contact.phone.$touched && contact.phone.$invalid ? 'error-border' : ''" ng-model="message.phone" placeholder="Enter valid Mobile Number">
+  </label>  
+
+  <label class="item item-input item-stacked-label">
+    <span class="input-label fz14">Message*</span>
+    <textarea placeholder="Your Message" required="required" ng-class="contact.message.$touched && contact.message.$invalid ? 'error-border' : ''" ng-model="message.message" name="message" class="textarea-height"></textarea>
+  </label> 
+</div>
+
+ <div class="row">
+  <button class="button  w100 radiuz-primary line-h50" type="submit" ng-disabled="contact.$invalid"  >Send</button>
+</div> 
+
+      </form>
+ 
+ 
+    </span>
+  </ion-content>
+</ion-view>
