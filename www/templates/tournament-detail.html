@@ -5,7 +5,7 @@
     <ion-content>
         <div class="cover-item-wrapper cover-detail-wrapper">
             <div class="cover-item cover-item-detail" style="background-image: url('{{tournament.details[0].img}}')">
-                <div class="cover-overlay"> 
+                <div class="cover-overlay">
                     <div class="celeb-info-detail tournament-detail">
                         <h2 class="mb0">{{::tournament.details[0].title}}</h2>
                         <p class="mb0">{{::tournament.details[0].start_date}} to {{tournament.details[0].end_date}}</p>
@@ -15,25 +15,27 @@
                     </div>
                 </div>
             </div>
-        </div> 
-    <div class="wrapper title-page"><h2>Team Participating</h2></div>
+        </div>
+        <div class="wrapper title-page">
+            <h2>Team Participating</h2></div>
 
         <div class="wrapper table">
-          <div class="row header">
-          <div class="col">Team</div>
-          <div class="col">Your Trade</div>
-          <div class="col">Action</div> 
-        </div>{{tournament.participating_team}}
-        <div class="row" ng-repeat="team in tournament.details[0].participating_team">
-          <div class="col">{{::team.team.post_title}}</div>
-          <div class="col">{{::tournament.pts[($index)][0].total}}</div>
-          <div class="col"><button class="trade-btn radiuz-btn" ng-click="trade()">Add Trade</button></div> 
-        </div> 
-        </div> 
-   <div class="wrapper title-page"><h2>Upcoming Matches</h2></div>
-  <div class="match-wrapper"> 
-             <div class="list list-listing">
-                    <span class="card padding" ng-repeat="matche in  tournament.matches.details">
+            <div class="row header">
+                <div class="col">Team</div>
+                <div class="col">Your Trade</div>
+                <div class="col">Action</div>
+            </div>{{tournament.participating_team}}
+            <div class="row" ng-repeat="team in tournament.details[0].participating_team">
+                <div class="col">{{::team.team.post_title}}</div>
+                <div class="col">{{::tournament.pts[($index)][0].total}}</div>
+                <div class="col"><button class="trade-btn radiuz-btn" ng-click="trade()">Add Trade</button></div>
+            </div>
+        </div>
+        <div class="wrapper title-page">
+            <h2>Upcoming Matches</h2></div>
+        <div class="match-wrapper">
+            <div class="list list-listing">
+                <span class="card padding" ng-repeat="matche in  tournament.matches.details">
          
  <h2 class="match-title fs20">{{::matche.title}}</h2> 
   <p class="mt2">{{::matche.tournament_name.post_title}}</p> 
@@ -46,9 +48,9 @@
           <button class="trade-btn radiuz-btn" ng-click="trade()">Add Trade</button>
           </div>
       </div>
-                </span> 
-                </div>
-            </div> 
+                </span>
+            </div>
+        </div>
         </div>
     </ion-content>
 </ion-view>
