@@ -4,51 +4,94 @@
     </ion-nav-title>
     <ion-subheader-bar class="bar bar-subheader">
         <div class="button-bar">
-            <a class="button radiuz-btn subheader-btn noradius" ng-class="activePanel == 'Tournaments' ? 'tab-selected' : ''" ng-click="activePanel = 'Tournaments'">Popular Tournaments</a>
-            <a class="button radiuz-btn subheader-btn noradius" ng-class="activePanel == 'Matches' ? 'tab-selected' : ''" ng-click="activePanel = 'Matches'">Popular Matches</a>
+            <a class="button radiuz-btn subheader-btn noradius" ng-class="activePanel == 'Matches' ? 'tab-selected' : ''" ng-click="activePanel = 'Matches'">Matches</a>
+            <a class="button radiuz-btn subheader-btn noradius" ng-class="activePanel == 'Tournaments' ? 'tab-selected' : ''" ng-click="activePanel = 'Tournaments'">Tournaments</a>
         </div>
     </ion-subheader-bar>
     <ion-content class="has-subheader">
-        <div class="tournament-wrapper" ng-show="activePanel == 'Tournaments'">
-            <div class="cover-item-wrapper" ng-repeat="tournament in featuredData.popularTournaments">
-            <a role="link" ng-href="{{getSegment(tournament.postLink)}}">
-                <div class="cover-item" style="background-image: url('{{::tournament.img}}')">
-                    <div class="cover-overlay">
-                        <div class="cover-input-about">
-                            <div class="cover-heading-text about-cover-text">
-                                <div class=" tournament-title">{{::tournament.title}}</div>
-                                <div class="tournament-date">{{::tournament.start_date}} to {{::tournament.onlyEDate}}</div>
-                                <div class="tournament-venue">{{::tournament.venue}}</div>
-                                <div class="tournament-trade"> Total Points Traded So Far: {{::tournament.total_tour_bets}}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </a>
-            </div>  
-        </div>
         <div class="mathes-wrapper" ng-show="activePanel == 'Matches'">
-            
- 
-             <div class="celebrity-listing listing-listing">
-                <div class="list list-listing">
-                    <span class="card padding" ng-repeat="matches in featuredData.popularMatches">
+            <div class="celebrity-listing listing-listing">
+                <!--           <div class="list list-listing">
+                    <span class="card padding" ng-repeat="matches in featuredMathces | orderBy: 'start_date_original':false">
          
- <h2 class="match-title fs20">{{::matches.title}}</h2> 
- <!-- <p class="mt2">ICC T20 World Cup 2011</p> -->
+ <h2 class="match-title fs20">{{::matches.select_teams[0].team_name.post_title}} Vs {{::matches.select_teams[1].team_name.post_title}}</h2>  
       <p class="mt2">{{::matches.start_date}}  to {{::matches.end_date}}</p> 
       <p class="mt2">{{::matches.venue}}</p> 
       <p class="mt2">Total Traded:  {{::matches.total_bets}}</p> 
       <div class="row pl0">
-          <div class="col-60 pl0 user-trade">Your Trade: 120</div>
+          <div class="col-60 pl0 user-trade">Your Trade: {{featuredDetail.tradeTotal[matches.id][0][0].total + Number(featuredDetail.tradeTotal[matches.id][1][0].total)}}</div>
           <div class="col-40 txt-right">
           <button class="trade-btn radiuz-btn" ng-click="trade()">Add Trade</button>
           </div>
       </div>
-                </span> 
+                </span>
+                </div> -->
+                <div class="list list-listing">
+                    <span class="card padding " ng-repeat="matches in featuredMathces">
+  <div class="row">
+   <div class="col col-50 team-name">{{::matches.select_teams[0].team_name.post_title}}</div>  
+  <div class="col col-33">
+  <div ><input type="text" class="w60 match-listing-input">
+ <span>+{{featuredDetail.tradeTotal[matches.id][0][0].total || 0}}</span>  </div></div> 
+  <div class="col "><button class="radiuz-primary trade-btn pull-right">Trade</button></div>
+ </div> 
+ <div class="pl10">Vs.</div>
+  <div class="row">
+   <div class="col col-50 team-name">{{::matches.select_teams[1].team_name.post_title}}</div>  
+  <div class="col col-33">
+  <div ><input type="text" class="w60 match-listing-input">
+ <span>+{{featuredDetail.tradeTotal[matches.id][1][0].total || 0}}</span>  </div></div> 
+  <div class="col "><button class="radiuz-primary trade-btn pull-right">Trade</button></div>
+ </div> 
+   <div class="row">
+   <div class="col col-50 team-name">Trade For Tie</div>  
+  <div class="col col-33">
+  <div ><input type="text" class="w60 match-listing-input">
+ <span>?</span>  </div></div> 
+  <div class="col "><button class="radiuz-primary trade-btn pull-right">Trade</button></div>
+ </div> 
+ <div>
+   <div class="series-name pl10">
+     {{::matches['tournament_name']['post_title']}} ({{::matches['venue']}})
+   </div>
+   <div class="series-name pl10">
+    {{::matches['onlySDate']}}&nbsp;{{::matches['matchStartTime']}} - {{::matches['matchEndTime']}} 
+   </div>
+   <div class="series-name pl10">
+   Total: {{matches["total_bets"]}}
+   </div>
+ </div>
+                </span>
                 </div>
+                <!--  <ion-list>
+                    <ion-item ng-repeat="matches in featuredMathces" ng-click="toggleItem(matches)" class="item item-text-wrap">
+                        <div ng-class="isItemShown(matches) ? 'item-expand active' : 'item-expand inactive'">
+                            <h2 class="match-title fs20">{{::matches.title}}</h2>
+                            <p class="mt2">{{::matches.start_date}} to {{::matches.end_date}}</p>
+                            <p class="mt2">{{::matches.venue}}</p>
+                            <p class="mt2">Total Traded: {{::matches.total_bets}}</p>
+                        </div>
+                    </ion-item>
+                </ion-list> -->
             </div>
-       
+        </div>
+        <div class="tournament-wrapper" ng-show="activePanel == 'Tournaments'">
+            <div class="cover-item-wrapper" ng-repeat="tournament in featuredData.popularTournaments">
+                <a role="link" ng-href="{{getSegment(tournament.postLink)}}">
+                    <div class="cover-item" style="background-image: url('{{::tournament.img}}')">
+                        <div class="cover-overlay">
+                            <div class="cover-input-about">
+                                <div class="cover-heading-text about-cover-text">
+                                    <div class=" tournament-title">{{::tournament.title}}</div>
+                                    <div class="tournament-date">{{::tournament.start_date}} to {{::tournament.onlyEDate}}</div>
+                                    <div class="tournament-venue">{{::tournament.venue}}</div>
+                                    <div class="tournament-trade"> Total Points Traded So Far: {{::tournament.total_tour_bets}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
     </ion-content>
 </ion-view>

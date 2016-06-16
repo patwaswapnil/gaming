@@ -1,20 +1,26 @@
 <ion-view>
     <ion-nav-title>
-        Matches
+        {{::categoryLabel}}
     </ion-nav-title>
     <ion-subheader-bar class="bar bar-subheader">
         <div class="button-bar">
-            <a class="item item-icon-right icon-sub radiuz-btn subheader-btn noradius" ng-click="categoryFilter()">
-                <i class="icon ion-android-more-vertical"></i> Cricket
+            <a class="item item-icon-right icon-sub radiuz-btn subheader-btn noradius txt-center" ng-click="getMatches(category, 'popular')" ng-class="filterLabel == 'popular' ? 'tab-selected' : ''">
+                 Popular
             </a>
-            <a class="item item-icon-right icon-sub radiuz-btn subheader-btn noradius" ng-class="subCategoryFilter()">
-                <i class="icon ion-android-more-vertical"></i> All Matches
+            <a class="item item-icon-right icon-sub radiuz-btn subheader-btn noradius txt-center" ng-click="getMatches(category, 'upcomming')" ng-class="filterLabel == 'upcomming' ? 'tab-selected' : ''">
+                 Upcoming
+            </a>
+            <a class="item item-icon-right icon-sub radiuz-btn subheader-btn noradius txt-center" ng-click="getMatches(category, 'daysBefore')" ng-class="filterLabel == 'daysBefore' ? 'tab-selected' : ''">
+                 Completed
+            </a>
+            <a class="item item-icon-right icon-sub radiuz-btn subheader-btn noradius txt-center" ng-click="getMatches(category, 'ongoing')" ng-class="filterLabel == 'ongoing' ? 'tab-selected' : ''">
+                 In Play
             </a>
         </div>
     </ion-subheader-bar>
     <ion-content class="has-subheader">
         <div class="mathes-wrapper">
-             <div class="celebrity-listing listing-listing">
+            <div class="celebrity-listing listing-listing">
                 <div class="list list-listing">
                     <span class="card padding" ng-repeat="matche in matches.catPost">
          
@@ -29,39 +35,12 @@
           <button class="trade-btn radiuz-btn" ng-click="trade()">Add Trade</button>
           </div>
       </div>
-                </span> 
+                </span>
+                    <span class="padding" ng-if="!matches.catPost.length">
+                    No match found.
+                </span>
                 </div>
             </div>
         </div>
     </ion-content>
-</ion-view>
-<script type="text/ng-template" id="templates/filter-match.html">
-    <ion-popover-view>
-        <ion-content>
-            <span class="filter-head"> 
- <ion-list>
-
-  <ion-radio ng-model="choice" class="checkbox-cover">Show All</ion-radio>
-  <ion-radio ng-model="choice" class="checkbox-cover">Cricket </ion-radio>
-  <ion-radio ng-model="choice" class="checkbox-cover">Soccer</ion-radio> 
-  <ion-radio ng-model="choice" class="checkbox-cover">Tennis</ion-radio>
-
-</ion-list> </span>
-        </ion-content>
-    </ion-popover-view>
-</script>
-
-<script type="text/ng-template" id="templates/filter-match1.html">
-    <ion-popover-view>
-        <ion-content>
-            <span class="filter-head"> 
- <ion-list>
-
-  <ion-radio ng-model="choice" class="checkbox-cover">Show All</ion-radio>
-  <ion-radio ng-model="choice" class="checkbox-cover">Popular Matches</ion-radio>  
-  <ion-radio ng-model="choice" class="checkbox-cover">Todays Matches </ion-radio>
-
-</ion-list> </span>
-        </ion-content>
-    </ion-popover-view>
-</script>
+</ion-view> 

@@ -1,6 +1,6 @@
 angular.module('gaming.controllers', [])
-    .controller('AppCtrl', ['$scope', '$rootScope', '$timeout', '$ionicModal', '$ionicPopup', '$ionicPopover', 'LSFactory', 'APIFactory', 'Loader', '$cordovaOauth', '$ionicActionSheet', 'CommonFactory',
-        function ($scope, $rootScope, $timeout, $ionicModal, $ionicPopup, $ionicPopover, LSFactory, APIFactory, Loader, $cordovaOauth, $ionicActionSheet, CommonFactory) {
+    .controller('AppCtrl', ['$scope', '$rootScope', '$timeout', '$ionicModal', '$ionicPopup', '$ionicPopover', 'LSFactory', 'APIFactory', 'Loader', '$cordovaOauth', '$ionicActionSheet', 'CommonFactory', '$ionicHistory',
+        function ($scope, $rootScope, $timeout, $ionicModal, $ionicPopup, $ionicPopover, LSFactory, APIFactory, Loader, $cordovaOauth, $ionicActionSheet, CommonFactory, $ionicHistory) {
             $scope.updateUser = function () {
                 if (LSFactory.get('gamingUser')) {
                     $rootScope.isLoggedIn = true;
@@ -131,16 +131,16 @@ angular.module('gaming.controllers', [])
                         text: 'Cancel',
                         type: 'fs12 reset-btn'
                     }, {
-                        text: 'Submit',
-                        type: 'button-balanced fs12 reset-btn',
-                        onTap: function (e) {
-                            if (!$scope.data.user_login) {
-                                e.preventDefault();
-                            } else {
-                                return $scope.data;
+                            text: 'Submit',
+                            type: 'button-balanced fs12 reset-btn',
+                            onTap: function (e) {
+                                if (!$scope.data.user_login) {
+                                    e.preventDefault();
+                                } else {
+                                    return $scope.data;
+                                }
                             }
-                        }
-                    }, ]
+                        },]
                 });
                 myPopup.then(function (data) {
                     if (!data) {
@@ -189,6 +189,16 @@ angular.module('gaming.controllers', [])
                     }
                 });
             };
+            $scope.toggleGroup = function (group) {
+                if ($scope.isGroupShown(group)) {
+                    $scope.shownGroup = null;
+                } else {
+                    $scope.shownGroup = group;
+                }
+            };
+            $scope.isGroupShown = function (group) {
+                return $scope.shownGroup === group;
+            };
             $scope.trade = function () {
                 $scope.data = {}
                 // An elaborate, custom popup
@@ -201,17 +211,17 @@ angular.module('gaming.controllers', [])
                         text: 'Cancel',
                         type: 'fz12 reset-btn'
                     }, {
-                        text: 'Submit',
-                        type: 'button-balanced fz12 reset-btn',
-                        onTap: function (e) {
-                            if (!$scope.data.trade) {
-                                //don't allow the user to close unless he enters wifi password
-                                e.preventDefault();
-                            } else {
-                                return $scope.data;
+                            text: 'Submit',
+                            type: 'button-balanced fz12 reset-btn',
+                            onTap: function (e) {
+                                if (!$scope.data.trade) {
+                                    //don't allow the user to close unless he enters wifi password
+                                    e.preventDefault();
+                                } else {
+                                    return $scope.data;
+                                }
                             }
-                        }
-                    }, ]
+                        },]
                 });
                 myPopup.then(function (data) {
                     if (!data) {
@@ -231,15 +241,61 @@ angular.module('gaming.controllers', [])
                     console.log(error);
                 })
             };
+            APIFactory.getMenu().then(function (response) {
+                $scope.menuItem = response.data.categories;
+            }, function (error) {
+                console.log('Unable to get menu item.');
+            });
+            
+            $scope.items = [{
+                title: '1',
+                text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+            }, {
+                    title: '2',
+                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                }, {
+                    title: '3',
+                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                }, {
+                    title: '4',
+                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                }, {
+                    title: '5',
+                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit'
+                }];
+
+            /*
+             * if given group is the selected group, deselect it
+             * else, select the given group
+             */
+            $scope.toggleItem = function (item) {
+                if ($scope.isItemShown(item)) {
+                    $scope.shownItem = null;
+                } else {
+                    $scope.shownItem = item;
+                }
+            };
+            $scope.isItemShown = function (item) {
+                return $scope.shownItem === item;
+            };
         }
     ])
     .controller('HomeCtrl', ['$scope', 'APIFactory', 'Loader', function ($scope, APIFactory, Loader) {
-        $scope.activePanel = 'Tournaments';
-
+        $scope.activePanel = 'Matches';
+        var data = {}
         function getHomeData(category) {
+            var data = { categoryName: 'Cricket', userId: $scope.user.ID };
             Loader.show();
             APIFactory.getHomeData().then(function (response) {
                 $scope.featuredData = response.data;
+                Loader.hide();
+            }, function (error) {
+                Loader.hide();
+                console.error(error);
+            });
+            APIFactory.getAllMatches(data).then(function (response) {
+                $scope.featuredDetail = response.data;
+                $scope.featuredMathces = response.data.catPost;
                 Loader.hide();
             }, function (error) {
                 Loader.hide();
@@ -249,10 +305,13 @@ angular.module('gaming.controllers', [])
         getHomeData();
 
     }])
-    .controller('MatchListingCtrl', ['$scope', '$rootScope', 'APIFactory', 'Loader',
-        function ($scope, $rootScope, APIFactory, Loader) {
-            function getMatches() {
-                var data = { categoryName: 'Cricket', userId: $scope.user.ID };
+    .controller('MatchListingCtrl', ['$scope', '$rootScope', 'APIFactory', 'Loader', '$ionicPopover', '$stateParams',
+        function ($scope, $rootScope, APIFactory, Loader, $ionicPopover, $stateParams) {
+            $scope.getMatches = function (cat, type) {
+                Loader.show();
+                data = { categoryName: cat, userId: $scope.user.ID, type:type || 'popular'};
+                $scope.categoryLabel = data.categoryName;
+                $scope.filterLabel = data.type;
                 APIFactory.getAllMatches(data).then(function (response) {
                     $scope.matches = response.data;
                     Loader.hide();
@@ -261,13 +320,14 @@ angular.module('gaming.controllers', [])
                     console.error(error);
                 });
             }
-            getMatches();
-
+            $scope.category = $stateParams.cat || 'Cricket';
+            $scope.getMatches($scope.category); 
+   
         }])
-    .controller('TournamentListingCtrl', ['$scope', '$rootScope', 'APIFactory', 'Loader',
-        function ($scope, $rootScope, APIFactory, Loader) {
+    .controller('TournamentListingCtrl', ['$scope', '$rootScope', 'APIFactory', 'Loader','$stateParams',
+        function ($scope, $rootScope, APIFactory, Loader, $stateParams) {
             function getTournaments(category) {
-                var data = { categoryName: 'Cricket', userId: $scope.user.ID };
+                var data = { categoryName: category, userId: $scope.user.ID };
                 APIFactory.getAllTournaments(data).then(function (response) {
                     $scope.tournaments = response.data;
                     Loader.hide();
@@ -276,7 +336,8 @@ angular.module('gaming.controllers', [])
                     console.error(error);
                 });
             }
-            getTournaments();
+            var category = $stateParams.cat || 'Cricket';
+            getTournaments(category);
         }])
     .controller('TournamentDetailCtrl', ['$scope', '$rootScope', 'APIFactory', 'Loader', '$stateParams',
         function ($scope, $rootScope, APIFactory, Loader, $stateParams) {
@@ -315,9 +376,7 @@ angular.module('gaming.controllers', [])
                 var data = { type: 'myAccount', userId: $scope.user.ID }
                 APIFactory.getUserAccount(data).then(function (response) {
                     $scope.userInfo = response.data;
-                    console.log($scope.userInfo)
                     Loader.hide();
-                    Loader.toggleLoadingWithMessage('asdf');
                     Loader.toast(response.data.msg)
                 }, function (error) {
                     Loader.hide();
@@ -325,4 +384,30 @@ angular.module('gaming.controllers', [])
                 });
             };
             $scope.getUserAccount();
+            $scope.updateUser = function (data) {
+                Loader.show();
+                var userInfo = { pass: data.password, fname: data.firstName[0], lname: data.lastName[0], email: data.userDetails.data.user_email, phone: data.phone[0], userId: $rootScope.user.ID };
+                APIFactory.updateUser(userInfo).then(function (response) {
+                    Loader.hide();
+                }, function (error) {
+                    Loader.hide();
+                    Loader.toast('Oops! something went wrong. Please try later again');
+                });
+            }
+        }])
+    .controller('TradingHistoryCtrl', ['$scope', '$rootScope', 'APIFactory', 'Loader',
+        function ($scope, $rootScope, APIFactory, Loader) {
+            $scope.pointsHidtory = function () {
+                var data = { type: 'myAccount', userId: $scope.user.ID }
+                APIFactory.getUserAccount(data).then(function (response) {
+                    $scope.history = response.data;
+                    Loader.hide();
+                    Loader.toast(response.data.msg)
+                }, function (error) {
+                    Loader.hide();
+                    Loader.toast('Oops! something went wrong, Please try later again');
+                });
+            };
+            $scope.pointsHidtory();
+
         }])

@@ -37,18 +37,41 @@
     <i class="icon ion-chevron-right"></i>
     Home
   </a>
+        
+             <a  class="item item-icon-left menu-item"  ng-click="toggleGroup('first')"
+                    ng-class="{active: isGroupShown('first')}">
+    <i class="icon" ng-class="isGroupShown('first') ? 'ion-minus' : 'ion-plus'"></i>
+   Matches
+  </a> 
+          <div class="item-accordion" 
+                    ng-show="isGroupShown('first')">
+            
+  <a   nav-clear menu-close class="item item-icon-left menu-item" ui-sref="app.match-listing({'cat': menu.name})"  ng-repeat="menu in menuItem">
+    <i class="icon ion-android-arrow-dropright"></i>
+   {{::menu.name}}
+  </a> 
+          </div>      
+ <a  class="item item-icon-left menu-item"  ng-click="toggleGroup('second')"
+                    ng-class="{active: isGroupShown('second')}" >
+    <i class="icon" ng-class="isGroupShown('second') ? 'ion-minus' : 'ion-plus'"></i>
+   Tournaments
+  </a> 
+          <div class="item-accordion" 
+                    ng-show="isGroupShown('second')">
+            
+  <a   nav-clear menu-close class="item item-icon-left menu-item" ui-sref="app.tournament-listing({'cat': menu.name})" ng-repeat="menu in menuItem">
+    <i class="icon ion-android-arrow-dropright"></i>
+   {{::menu.name}}
+  </a>  
+          </div>
  
-  <a   nav-clear menu-close class="item item-icon-left menu-item" ui-sref="app.match-listing">
-    <i class="icon ion-chevron-right"></i>
-    Matches
-  </a>
-  <a nav-clear menu-close class="item item-icon-left menu-item" ui-sref="app.tournament-listing">
-    <i class="icon ion-chevron-right"></i>
-    Tournaments
-  </a>
   <a nav-clear menu-close class="item item-icon-left menu-item" ui-sref="app.my-trades">
     <i class="icon ion-chevron-right"></i>
     My Trades
+  </a>
+  <a nav-clear menu-close class="item item-icon-left menu-item" ui-sref="app.trade-history">
+    <i class="icon ion-chevron-right"></i>
+    Trading History
   </a>
   <a nav-clear menu-close class="item item-icon-left menu-item" ui-sref="app.buy-encash">
     <i class="icon ion-chevron-right"></i>

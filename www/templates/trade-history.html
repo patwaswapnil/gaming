@@ -1,0 +1,32 @@
+<ion-view hide-menu-button="true">
+    <ion-nav-title>
+        Win/Lose Points
+    </ion-nav-title>
+     
+    <ion-content>
+ 
+     <div class="list">
+
+<!--     <div class="item item-thumbnail-left pl110" >
+      <div class="wrapper-point">
+        <div class="point">02</div>
+      </div>
+      <h2>Tournament: Big Bash League 2016</h2>
+      <p>Team: India</p>
+      <p>Placed On: 2016-05-18 19:10:17</p>
+      <p>Result: Win</p>
+    </div> -->
+    <div class="item item-thumbnail-left pl110" ng-repeat="result in history.winLoss">
+      <div class="wrapper-point" ng-class="result.tourDetails.win == 'Yes' ? 'won' : 'loss'">
+        <div class="point">{{::result.tourDetails.pts}}</div>
+      </div>
+      <h2>Tournament: {{::result.tourDetails.tourTitle}}</h2>
+      <p>Participant : {{::result.tourDetails.teamTitle}}</p>
+      <p>Placed on: {{::result.tourDetails.bet_at}}</p>
+      <p>Result: {{result.tourDetails.win == 'Yes' ? 'Win' : 'Lose'}}</p>
+    </div>
+ 
+
+</div>
+    </ion-content>
+</ion-view>

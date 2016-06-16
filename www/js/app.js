@@ -1,6 +1,6 @@
 // Ionic gaming App
-var domain = 'http://gaming-inf.cruxservers.in/api/?action=';
-var base_url = "http://gaming-inf.cruxservers.in/"; 
+var domain = 'http://www.eventexchange.co.in/api/?action=';
+var base_url = "http://www.eventexchange.co.in/"; 
 angular.module('gaming', ['ionic', 'gaming.controllers', 'gaming.services', 'gaming.directives', 'ngCordova'])
 
 .run(function($ionicPlatform) {
@@ -34,7 +34,7 @@ angular.module('gaming', ['ionic', 'gaming.controllers', 'gaming.services', 'gam
     }
   })
   .state('app.tournament-listing', {
-    url: '/tournament-listing',
+    url: '/tournament-listing/:cat',
     views: {
       'menuContent': {
         templateUrl: 'templates/tournament-listing.html',
@@ -43,7 +43,7 @@ angular.module('gaming', ['ionic', 'gaming.controllers', 'gaming.services', 'gam
     }
   })
   .state('app.match-listing', {
-    url: '/match-listing',
+    url: '/match-listing/:cat',
     views: {
       'menuContent': {
         templateUrl: 'templates/match-listing.html',
@@ -107,6 +107,15 @@ angular.module('gaming', ['ionic', 'gaming.controllers', 'gaming.services', 'gam
     views: {
       'menuContent': {
         templateUrl: 'templates/buy-encash-points.html' 
+      }
+    }
+  })
+  .state('app.trade-history', {
+    url: '/trade-history',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/trade-history.html',
+        controller: 'TradingHistoryCtrl' 
       }
     }
   })

@@ -4,9 +4,9 @@
     </ion-nav-title>
     <ion-subheader-bar class="bar bar-subheader">
         <div class="button-bar" ng-init="activeState = 'buy'">
-            <a class="button radiuz-btn subheader-btn noradius" ng-click="activeState = 'buy'">Buy Points</a>
-            <a class="button radiuz-btn subheader-btn noradius" ng-click="activeState = 'encash'">Encash Points</a>
-            <a class="button radiuz-btn subheader-btn noradius" ng-click="activeState = 'history'">Purches History</a>
+            <a class="button radiuz-btn subheader-btn noradius" ng-class="activeState == 'buy' ? 'tab-selected' : ''" ng-click="activeState = 'buy'">Buy Points</a>
+            <a class="button radiuz-btn subheader-btn noradius" ng-class="activeState == 'encash' ? 'tab-selected' : ''" ng-click="activeState = 'encash'">Encash Points</a>
+            <a class="button radiuz-btn subheader-btn noradius" ng-class="activeState == 'history' ? 'tab-selected' : ''" ng-click="activeState = 'history'">Purches History</a>
         </div>
     </ion-subheader-bar>
     <ion-content class="has-subheader">
