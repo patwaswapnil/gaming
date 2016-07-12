@@ -1648,7 +1648,7 @@ at the bottom as the textarea resizes */
 }
 
 .custom-hero {
-    height: 110px !important;
+    height: 85px  !important;
 }
 
 .user-content {
@@ -1947,4 +1947,74 @@ a {
     height: 25px;
     padding: 3px 9px;
     font-size: 12px;
+}
+
+.header-points {
+    font-size: 13px !important;
+    font-weight: bold !important;
+}
+.one-liner {
+     white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.fz24 {
+        font-size: 24px !important;
+}
+.cart-custom-item1 {
+    
+    background-color: #d4202b;
+    color: #fff !important;
+}
+.all-listed {
+    background-color: #d4202b;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+}
+.leader-card {
+    text-align: center;
+}
+.leader-card img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+}
+.about-item-wrapper {
+    max-height: 130px;
+}
+.p0 {
+    padding: 0px !important;
+}
+.p2 {
+    padding: 2px !important;
+}
+.plr2 {
+    padding:0px 2px !important;
+}
+.p7 {
+    padding: 7px !important;
+}
+.text-center {
+    text-align: center !important;
+}
+.cart-custom-item2 {
+    background-color: #a44248;
+    color: #fff !important;
+}
+.btn-date {
+    padding: 0px 15px !important;
+}
+.cat-scroll {
+     background-color: #444444 !important;
+    padding: 0px 0px;
+    height: 44px; 
+}
+.cat-button {
+    height: 43px !important;
+    min-height: 43px !important;
+}
+.listing-cart-padding {
+    padding: 0px 10px 10px 10px;
 }

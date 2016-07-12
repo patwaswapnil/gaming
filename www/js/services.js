@@ -3,7 +3,7 @@ angular.module('gaming.services', [])
     .factory('APIFactory', ['$http', '$httpParamSerializer', function ($http, $httpParamSerializer) {
         var api = {
             getHomeData: function (data) {
-                return $http.get(domain + "home");
+                return $http.get(domain + "home&userId=" + data.userId);
             },
             authUser: function (data) {
                 var req = { method: 'POST', url: domain + 'login', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, data: jQuery.param({ 'data': data }) };
@@ -21,6 +21,10 @@ angular.module('gaming.services', [])
                 var req = { method: 'POST', url: domain + 'listing-matches&userId=' + data.userId, headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, data: jQuery.param({ 'data': data }) };
                 return $http(req);
             },
+            getHomeMatches: function (data) {
+                var req = { method: 'POST', url: domain + 'home-match-listing&userId=' + data.userId, headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, data: jQuery.param({ 'data': data }) };
+                return $http(req);
+            },
             getAllTournaments: function (data) {
                 var req = { method: 'POST', url: domain + 'listing-tournaments&userId=' + data.userId, headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, data: jQuery.param({ 'data': data }) };
                 return $http(req);
@@ -29,8 +33,7 @@ angular.module('gaming.services', [])
                 var req = { method: 'POST', url: domain + 'tournaments-detail&userId=' + data.userId, headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, data: jQuery.param({ 'data': data }) };
                 return $http(req);
             },
-            sendContactFrom: function (data, userId) {
-                console.log(userId)
+            sendContactFrom: function (data, userId) { 
                 var req = { method: 'POST', url: domain + 'contact-us&userId=' + userId, headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, data: $httpParamSerializer({ 'data': data }) };
                 return $http(req);
             },
@@ -44,6 +47,14 @@ angular.module('gaming.services', [])
             },
             getMenu: function (data) {
                 return $http.get(domain + "header"); 
+            },
+            addTrade: function (data) {  
+                var req = { method: 'POST', url: domain + 'trade&userId=' + data.userId, headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, data: jQuery.param({ 'data': data }) };
+                return $http(req);
+            },
+            multiTrade: function (data) {  
+                var req = { method: 'POST', url: domain + 'multi-trade-match&userId=' + data.userId, headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, data: jQuery.param({ 'data': data }) };
+                return $http(req);
             }
         };
         return api;

@@ -3,18 +3,22 @@
         My Trades
     </ion-nav-title>
     <ion-subheader-bar class="bar bar-subheader">
-        <div class="button-bar" ng-init="activeState = 'buy'">
-            <a class="button radiuz-btn subheader-btn noradius" ng-class="activeState == 'buy' ? 'tab-selected' : ''" ng-click="activeState = 'buy'">Buy Points</a>
-            <a class="button radiuz-btn subheader-btn noradius" ng-class="activeState == 'encash' ? 'tab-selected' : ''" ng-click="activeState = 'encash'">Encash Points</a>
-            <a class="button radiuz-btn subheader-btn noradius" ng-class="activeState == 'history' ? 'tab-selected' : ''" ng-click="activeState = 'history'">Purches History</a>
-        </div>
+        <div > 
+    
+               <ion-scroll direction="x" class="cat-scroll item ion-sc"> 
+        <a class="button radiuz-btn subheader-btn noradius cat-button" ng-class="activeState == 'buy' ? 'tab-selected' : ''" ng-click="switchTab('buy')">Buy Points</a>
+        <a class="button radiuz-btn subheader-btn noradius cat-button" ng-class="activeState == 'encash' ? 'tab-selected' : ''" ng-click="switchTab('encash')">Encash Points</a>
+        <a class="button radiuz-btn subheader-btn noradius cat-button" ng-class="activeState == 'history' ? 'tab-selected' : ''" ng-click="switchTab('history')">Purchase History</a>
+ 
+            </ion-scroll>
+                </div>
     </ion-subheader-bar>
     <ion-content class="has-subheader">
         <div ng-if="activeState == 'buy'">
             <div class="wrapper padding">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat accusantium, numquam sint rem recusandae veritatis, alias veniam nobis minima molestiae eligendi doloremque, officia. Odio error eius animi, cumque? Et porro, labore unde obcaecati ab officiis.
+                To get more points please mail support@eventexchange.co.in with the subject "Request for more points" . Kindly email from the registered Email Id or mentioned the same in the mail.
             </div>
-            <div class="buy-point-wrapper">
+         <!--    <div class="buy-point-wrapper">
                 <form action="">
                     <div class="list">
                         
@@ -31,13 +35,13 @@
   </span>
                     </div>
                 </form>
-            </div>
+            </div> -->
         </div>
         <div ng-if="activeState == 'encash'">
             <div class="wrapper padding">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat accusantium, numquam sint rem recusandae veritatis, alias veniam nobis minima molestiae eligendi doloremque, officia. Odio error eius animi, cumque? Et porro, labore unde obcaecati ab officiis.
+               To encash points please mail support@eventexchange.co.in with the subject "Request for encash points" . Kindly email from the registered Email Id or mentioned the same in the mail.
             </div>
-            <div class="buy-point-wrapper">
+<!--             <div class="buy-point-wrapper">
                   <form action="">
                     <div class="list">
                         
@@ -53,7 +57,7 @@
                   </span>
                     </div>
                 </form>
-            </div>
+            </div> -->
         </div>
         <div class="purches-history" ng-if="activeState == 'history'">
            <div class="wrapper table">

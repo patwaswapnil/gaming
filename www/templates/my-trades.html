@@ -2,91 +2,36 @@
     <ion-nav-title>
         My Trades
     </ion-nav-title>
-     <ion-subheader-bar class="bar bar-subheader">
-        <div class="button-bar" ng-init="activeLevel = 'tournametlevel'">
-            <a class="button radiuz-btn subheader-btn noradius" ng-click="activeLevel = 'tournametlevel'">Tournament Level</a>
-            <a class="button radiuz-btn subheader-btn noradius" ng-click="activeLevel = 'matchlevel'">  Match Level</a>
+<!--        <ion-subheader-bar class="bar bar-subheader">
+       <form action="">
+           <div class="row p0">
+               <div class="col p2 text-center">
+                   <button class="  icon-left btn-date ion-android-calendar" ng-click="getstartDate()"> <span>{{startDate || 'Date From'}} </span></button>
+               </div>
+               <div class="col p2 text-center">
+                   <button class="  icon-left btn-date ion-android-calendar" ng-click="getendDate()">  {{endDate || 'Date From'}}</span></button>
+               </div>
+               <div class="col p2 text-center">
+                   <button class="icon-left ion-search" ng-click="getFilteredData()"></button>
+                   <button class="icon-left ion-loop" ng-click="clearFiltere()"></button>
+                   <button class="icon-left ion-android-arrow-down"></button>
+               </div>
+           </div>
+       </form>
+      
+    </ion-subheader-bar> -->
+    <ion-content class="has-subheade">
+        <div class="card" ng-repeat="trade in trades">
+            <div class="item item-divider  cart-custom-item cart-custom-item2">
+                {{$index + 1}}. {{::trade.tourDetails.tourTitle}}
+            </div>
+            <div class="item item-text-wrap">
+                <div><span class="match-key bold">Traded For: </span><span class="match-value">{{trade.tourDetails.teamTitle == 'Api' ? 'Tie' : trade.tourDetails.teamTitle}}</span> </div>
+                <!--   <div><span class="match-key bold">Teams: </span><span class="match-value">India, Australia, New Zealand</span> </div> -->
+                <div><span class="match-key bold">Point: </span><span class="match-value">{{::trade.tourDetails.pts}}</span> </div>
+                <div><span class="match-key bold"> Bet Placed On: </span><span class="match-value">{{::trade.tourDetails.bet_at}}</span> </div>
+            </div>
         </div>
-    </ion-subheader-bar>
-    <ion-content class="has-subheader">
-        <div class="card" ng-if="activeLevel == 'tournametlevel'">
-   <div class="item item-divider cart-custom-item">
-   Tri Series
-  </div>
-  <div class="item item-text-wrap">
-     <div><span class="match-key bold">Teams: </span><span class="match-value">India, Australia, New Zealand</span> </div>
-     <div><span class="match-key bold">Point: </span><span class="match-value">4</span> </div>
-     <div><span class="match-key bold"> Bet Placed On: </span><span class="match-value">14-Apr-2016</span> </div>
-  </div> 
-    <div class="item item-divider cart-custom-item">
-    Winner: <span class="bold">India</span>
-  </div> 
-</div>
-        <div class="card" ng-if="activeLevel == 'tournametlevel'">
-   <div class="item item-divider cart-custom-item">
-   Tri Series
-  </div>
-  <div class="item item-text-wrap">
-     <div><span class="match-key bold">Teams: </span><span class="match-value">India, Australia, New Zealand</span> </div>
-     <div><span class="match-key bold">Point: </span><span class="match-value">4</span> </div>
-     <div><span class="match-key bold"> Bet Placed On: </span><span class="match-value">14-Apr-2016</span> </div>
-  </div> 
-    <div class="item item-divider cart-custom-item">
-    Winner: <span class="bold">India</span>
-  </div> 
-</div>
-        <div class="card" ng-if="activeLevel == 'tournametlevel'">
-   <div class="item item-divider cart-custom-item">
-   Tri Series
-  </div>
-  <div class="item item-text-wrap">
-     <div><span class="match-key bold">Teams: </span><span class="match-value">India, Australia, New Zealand</span> </div>
-     <div><span class="match-key bold">Point: </span><span class="match-value">4</span> </div>
-     <div><span class="match-key bold"> Bet Placed On: </span><span class="match-value">14-Apr-2016</span> </div>
-  </div> 
-    <div class="item item-divider cart-custom-item">
-    Winner: <span class="bold">India</span>
-  </div> 
-</div>
-<div class="card"  ng-if="activeLevel == 'matchlevel'">
-  <div class="item item-divider cart-custom-item">
-   India Vs. Pakistan
-  </div>
-  <div class="item item-text-wrap">
-     <div><span class="match-key bold">Series: </span><span class="match-value">ICC Champions Trophy</span> </div>
-     <div><span class="match-key bold">Point: </span><span class="match-value">4</span> </div>
-     <div><span class="match-key bold"> Bet Placed On: </span><span class="match-value">14-Apr-2016</span> </div>
-  </div>
-    <div class="item item-divider cart-custom-item">
-    Winner: <span class="bold">India</span>
-  </div>
-</div>
-<div class="card"  ng-if="activeLevel == 'matchlevel'">
-  <div class="item item-divider cart-custom-item">
-   India Vs. Pakistan
-  </div>
-  <div class="item item-text-wrap">
-     <div><span class="match-key bold">Series: </span><span class="match-value">ICC Champions Trophy</span> </div>
-     <div><span class="match-key bold">Point: </span><span class="match-value">4</span> </div>
-     <div><span class="match-key bold"> Bet Placed On: </span><span class="match-value">14-Apr-2016</span> </div>
-  </div>
-    <div class="item item-divider cart-custom-item">
-    Winner: <span class="bold">India</span>
-  </div>
-</div>
-<div class="card"  ng-if="activeLevel == 'matchlevel'">
-  <div class="item item-divider cart-custom-item">
-   India Vs. Pakistan
-  </div>
-  <div class="item item-text-wrap">
-     <div><span class="match-key bold">Series: </span><span class="match-value">ICC Champions Trophy</span> </div>
-     <div><span class="match-key bold">Point: </span><span class="match-value">4</span> </div>
-     <div><span class="match-key bold"> Bet Placed On: </span><span class="match-value">14-Apr-2016</span> </div>
-  </div>
-    <div class="item item-divider cart-custom-item">
-    Winner: <span class="bold">India</span>
-  </div>
-</div>
-
+           <ion-infinite-scroll on-infinite="loadMoreTrades()" ng-if="canLoadMore"  immediate-check="false" distance="1%"></ion-infinite-scroll>
     </ion-content>
 </ion-view>

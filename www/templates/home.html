@@ -1,79 +1,65 @@
 <ion-view>
     <ion-nav-title>
-        Gaming
+        Event Exchange
     </ion-nav-title>
     <ion-subheader-bar class="bar bar-subheader">
-        <div class="button-bar">
-            <a class="button radiuz-btn subheader-btn noradius" ng-class="activePanel == 'Matches' ? 'tab-selected' : ''" ng-click="activePanel = 'Matches'">Matches</a>
-            <a class="button radiuz-btn subheader-btn noradius" ng-class="activePanel == 'Tournaments' ? 'tab-selected' : ''" ng-click="activePanel = 'Tournaments'">Tournaments</a>
-        </div>
+        <ion-scroll direction="x" class="cat-scroll item ion-sc">
+            <a class="button radiuz-btn subheader-btn noradius cat-button" ng-class="activePanel == 'Matches' ? 'tab-selected' : ''" ng-click="toggleSection('Matches')">Popular Matches</a>
+            <a class="button radiuz-btn subheader-btn noradius cat-button" ng-class="activePanel == 'Tournaments' ? 'tab-selected' : ''" ng-click="toggleSection('Tournaments')">Popular Tournaments</a>
+        </ion-scroll>
     </ion-subheader-bar>
     <ion-content class="has-subheader">
         <div class="mathes-wrapper" ng-show="activePanel == 'Matches'">
             <div class="celebrity-listing listing-listing">
-                <!--           <div class="list list-listing">
-                    <span class="card padding" ng-repeat="matches in featuredMathces | orderBy: 'start_date_original':false">
-         
- <h2 class="match-title fs20">{{::matches.select_teams[0].team_name.post_title}} Vs {{::matches.select_teams[1].team_name.post_title}}</h2>  
-      <p class="mt2">{{::matches.start_date}}  to {{::matches.end_date}}</p> 
-      <p class="mt2">{{::matches.venue}}</p> 
-      <p class="mt2">Total Traded:  {{::matches.total_bets}}</p> 
-      <div class="row pl0">
-          <div class="col-60 pl0 user-trade">Your Trade: {{featuredDetail.tradeTotal[matches.id][0][0].total + Number(featuredDetail.tradeTotal[matches.id][1][0].total)}}</div>
-          <div class="col-40 txt-right">
-          <button class="trade-btn radiuz-btn" ng-click="trade()">Add Trade</button>
-          </div>
-      </div>
-                </span>
-                </div> -->
                 <div class="list list-listing">
-                    <span class="card padding " ng-repeat="matches in featuredMathces">
+                    <span class="card listing-cart-padding " ng-repeat="matches in featuredMathces">
   <div class="row">
    <div class="col col-50 team-name">{{::matches.select_teams[0].team_name.post_title}}</div>  
-  <div class="col col-33">
-  <div ><input type="text" class="w60 match-listing-input">
- <span>+{{featuredDetail.tradeTotal[matches.id][0][0].total || 0}}</span>  </div></div> 
-  <div class="col "><button class="radiuz-primary trade-btn pull-right">Trade</button></div>
- </div> 
- <div class="pl10">Vs.</div>
-  <div class="row">
-   <div class="col col-50 team-name">{{::matches.select_teams[1].team_name.post_title}}</div>  
-  <div class="col col-33">
-  <div ><input type="text" class="w60 match-listing-input">
- <span>+{{featuredDetail.tradeTotal[matches.id][1][0].total || 0}}</span>  </div></div> 
-  <div class="col "><button class="radiuz-primary trade-btn pull-right">Trade</button></div>
- </div> 
-   <div class="row">
-   <div class="col col-50 team-name">Trade For Tie</div>  
-  <div class="col col-33">
-  <div ><input type="text" class="w60 match-listing-input">
- <span>?</span>  </div></div> 
-  <div class="col "><button class="radiuz-primary trade-btn pull-right">Trade</button></div>
- </div> 
- <div>
-   <div class="series-name pl10">
-     {{::matches['tournament_name']['post_title']}} ({{::matches['venue']}})
-   </div>
-   <div class="series-name pl10">
-    {{::matches['onlySDate']}}&nbsp;{{::matches['matchStartTime']}} - {{::matches['matchEndTime']}} 
-   </div>
-   <div class="series-name pl10">
-   Total: {{matches["total_bets"]}}
-   </div>
- </div>
-                </span>
-                </div>
-                <!--  <ion-list>
-                    <ion-item ng-repeat="matches in featuredMathces" ng-click="toggleItem(matches)" class="item item-text-wrap">
-                        <div ng-class="isItemShown(matches) ? 'item-expand active' : 'item-expand inactive'">
-                            <h2 class="match-title fs20">{{::matches.title}}</h2>
-                            <p class="mt2">{{::matches.start_date}} to {{::matches.end_date}}</p>
-                            <p class="mt2">{{::matches.venue}}</p>
-                            <p class="mt2">Total Traded: {{::matches.total_bets}}</p>
-                        </div>
-                    </ion-item>
-                </ion-list> -->
+  <div class="col col-50">
+  <div ><input type="number" class="w60 match-listing-input" ng-model="matches.points[matches.select_teams[0].team_name.ID]">
+ <!-- <span>+{{featuredDetail.tradeTotal[matches.select_teams[0].team_name.ID][0][0].total || 0}}</span> </div> -->
+                <span ng-click="TradeToastInfo(matches.mytradedTotal[matches.select_teams[0].team_name.ID], matches.select_teams[0].team_name.post_title)">+{{matches.mytradedTotal[matches.select_teams[0].team_name.ID] || 0}}</span> </div>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col col-50 team-name">{{::matches.select_teams[1].team_name.post_title}}</div>
+            <div class="col col-50">
+                <div>
+                    <input type="number" class="w60 match-listing-input" ng-model="matches.points[matches.select_teams[1].team_name.ID]">
+                    <span ng-click="TradeToastInfo(matches.mytradedTotal[matches.select_teams[1].team_name.ID], matches.select_teams[1].team_name.post_title)">+{{matches.mytradedTotal[matches.select_teams[1].team_name.ID] || 0}}</span> </div>
             </div>
+        </div>
+        <div class="row">
+            <div class="col col-50 team-name">Trade For Tie </div>
+            <div class="col col-50">
+                <div>
+                    <input type="number" class="w60 match-listing-input" ng-model="matches.tie">
+                    <span ng-click="TradeToastInfo(matches.mytradedTotal.mytradedTie, 'Tie')">+{{matches.mytradedTotal.mytradedTie || 0}}</span> </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-33">
+            </div>
+            <div class="col ">
+                <button class="radiuz-primary trade-btn pull-right" ng-click="addHomeTred(matches['postLink'], matches['id'], matches.points, matches.tie,  matches.uid, $index)">Trade</button>
+            </div>
+        </div>
+        <div>
+            <div class="series-name pl10 one-liner" ng-click="toastMsg(matches['tournament_name']['post_title'] +' '+ matches['venue'])">
+                {{::matches['tournament_name']['post_title']}} ({{::matches['venue']}})
+            </div>
+            <div class="series-name pl10">
+                {{::matches['onlySDate']}}&nbsp;{{::matches['matchStartTime']}} - {{::matches['matchEndTime']}}
+            </div>
+            <div class="series-name pl10 bold">
+                Total Traded Points: {{matches.mytradedTotal.tourTotal}}
+            </div>
+        </div>
+        </span>
+        </div>
+        </div>
+        <div class="all-listed padding" ng-if="!canLoadMore">All popular matches listed.</div>
+        <ion-infinite-scroll on-infinite="loadMoreMatches()" ng-if="canLoadMore && activePanel != 'Tournaments'" immediate-check="false" distance="5%"></ion-infinite-scroll>
         </div>
         <div class="tournament-wrapper" ng-show="activePanel == 'Tournaments'">
             <div class="cover-item-wrapper" ng-repeat="tournament in featuredData.popularTournaments">
@@ -85,12 +71,32 @@
                                     <div class=" tournament-title">{{::tournament.title}}</div>
                                     <div class="tournament-date">{{::tournament.start_date}} to {{::tournament.onlyEDate}}</div>
                                     <div class="tournament-venue">{{::tournament.venue}}</div>
-                                    <div class="tournament-trade"> Total Points Traded So Far: {{::tournament.total_tour_bets}}</div>
+                                    <div class="tournament-trade"> Total Traded Points: {{::tournament.total_tour_bets || 0}}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h3 class="listing-title" ng-if="featuredData.leaderBoard['info'].length">Leadeboard</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col item leader-card" ng-repeat="leaderBoard in featuredData.leaderBoard['info']">
+                <div>
+                    <img ng-if="home.leaderBoard['getUserImg'][$index] == null && leaderBoard['fbUrl'] == null" ng-src="http://www.eventexchange.co.in/wp-content/themes/canvas/images/icons/avatar.jpg" alt="img">
+                    <img ng-if="home.leaderBoard['getUserImg'][$index] != null && leaderBoard['fbUrl'] == null" ng-src="{{home.leaderBoard['getUserImg'][$index]}}" alt="img">
+                    <img ng-if="leaderBoard['fbUrl'] != null" ng-src="https://graph.facebook.com/{{leaderBoard['fbUrl']}}/picture?type=large" alt="img">
+                </div>
+                <div>
+                    {{leaderBoard['userName']}}
+                </div>
+                <div class="bold">
+                    Points: {{leaderBoard['pts']}}
+                </div>
             </div>
         </div>
     </ion-content>

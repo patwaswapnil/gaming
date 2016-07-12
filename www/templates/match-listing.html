@@ -3,44 +3,70 @@
         {{::categoryLabel}}
     </ion-nav-title>
     <ion-subheader-bar class="bar bar-subheader">
-        <div class="button-bar">
-            <a class="item item-icon-right icon-sub radiuz-btn subheader-btn noradius txt-center" ng-click="getMatches(category, 'popular')" ng-class="filterLabel == 'popular' ? 'tab-selected' : ''">
-                 Popular
-            </a>
-            <a class="item item-icon-right icon-sub radiuz-btn subheader-btn noradius txt-center" ng-click="getMatches(category, 'upcomming')" ng-class="filterLabel == 'upcomming' ? 'tab-selected' : ''">
-                 Upcoming
-            </a>
-            <a class="item item-icon-right icon-sub radiuz-btn subheader-btn noradius txt-center" ng-click="getMatches(category, 'daysBefore')" ng-class="filterLabel == 'daysBefore' ? 'tab-selected' : ''">
-                 Completed
-            </a>
-            <a class="item item-icon-right icon-sub radiuz-btn subheader-btn noradius txt-center" ng-click="getMatches(category, 'ongoing')" ng-class="filterLabel == 'ongoing' ? 'tab-selected' : ''">
-                 In Play
-            </a>
-        </div>
+ 
+        <ion-scroll direction="x" class="cat-scroll item ion-sc">
+            <a class="button radiuz-btn subheader-btn noradius cat-button" ng-click="getMatches(category, 'popular')" ng-class="filterLabel == 'popular' ? 'tab-selected' : ''">Popular</a>
+            <a class="button radiuz-btn subheader-btn noradius cat-button" ng-click="getMatches(category, 'upcomming')" ng-class="filterLabel == 'upcomming' ? 'tab-selected' : ''">Upcoming</a>
+            <a class="button radiuz-btn subheader-btn noradius cat-button" ng-click="getMatches(category, 'daysBefore')" ng-class="filterLabel == 'daysBefore' ? 'tab-selected' : ''">Completed</a>
+            <a class="button radiuz-btn subheader-btn noradius cat-button" ng-click="getMatches(category, 'ongoing')" ng-class="filterLabel == 'ongoing' ? 'tab-selected' : ''">In Play</a>
+        </ion-scroll>
     </ion-subheader-bar>
     <ion-content class="has-subheader">
         <div class="mathes-wrapper">
             <div class="celebrity-listing listing-listing">
                 <div class="list list-listing">
-                    <span class="card padding" ng-repeat="matche in matches.catPost">
-         
- <h2 class="match-title fs20">{{::matche.title}}</h2> 
-  <p class="mt2">{{::matche.tournament_name.post_title}}</p> 
-      <p class="mt2">{{::matche.onlySDate}}, {{::matche.matchStartTime}} - {{::matche.matchEndTime}}</p> 
-      <p class="mt2">{{::matche.venue}}</p> 
-      <p class="mt2">Total Traded:  {{::matche.total_bets}}</p> 
-      <div class="row pl0">
-          <div class="col-60 pl0 user-trade">Your Trade: 120</div>
-          <div class="col-40 txt-right">
-          <button class="trade-btn radiuz-btn" ng-click="trade()">Add Trade</button>
-          </div>
-      </div>
-                </span>
-                    <span class="padding" ng-if="!matches.catPost.length">
-                    No match found.
-                </span>
-                </div>
+                    <span class="card listing-cart-padding " ng-repeat="matches in matches">
+  <div class="row">
+   <div class="col col-50 team-name">{{::matches.select_teams[0].team_name.post_title}}</div>  
+  <div class="col col-50">
+  <div ><input type="text" class="w60 match-listing-input" ng-model="matches.points[matches.select_teams[0].team_name.ID]">
+ <span ng-click="TradeToastInfo(matches.mytradedTotal[matches.select_teams[0].team_name.ID], matches.select_teams[0].team_name.post_title)">+{{matches.mytradedTotal[matches.select_teams[0].team_name.ID] || 0}}</span> </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col col-50 team-name">{{::matches.select_teams[1].team_name.post_title}}</div>
+            <div class="col col-50">
+                <div>
+                    <input type="text" class="w60 match-listing-input" ng-model="matches.points[matches.select_teams[1].team_name.ID]">
+                    <span ng-click="TradeToastInfo(matches.mytradedTotal[matches.select_teams[1].team_name.ID], matches.select_teams[1].team_name.post_title)">+{{matches.mytradedTotal[matches.select_teams[1].team_name.ID] || 0}}</span> </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-50 team-name">Trade For Tie</div>
+            <div class="col col-50">
+                <div>
+                    <input type="text" class="w60 match-listing-input" ng-model="matches.tie">
+                    <span ng-click="TradeToastInfo(matches.mytradedTotal.mytradedTie, 'Tie')">+{{matches.mytradedTotal.mytradedTie || 0}}</span> </div>
+            </div> 
+        </div>
+               <div class="row">
+           
+            <div class="col col-33">
+                
+            </div>
+            <div class="col ">
+                     <button class="radiuz-primary trade-btn pull-right" ng-click="addListingTred(matches['postLink'], matches['id'], matches.points, matches.tie, matches.uid, $index)">Trade</button>
+            </div>
+        </div>
+        <div>
+            <div class="series-name pl10 one-liner"  ng-click="toastMsg(matches['tournament_name']['post_title'] +' '+ matches['venue'])">
+                {{::matches['tournament_name']['post_title']}} ({{::matches['venue']}})
+            </div>
+            <div class="series-name pl10">
+                {{::matches['onlySDate']}}&nbsp;{{::matches['matchStartTime']}} - {{::matches['matchEndTime']}}
+            </div>
+            <div class="series-name pl10 bold">
+                Total Traded Points: {{matches.mytradedTotal.tourTotal}}
+            </div>
+        </div>
+        </span>
+        </div>
+        <div class="no-matches padding" ng-if="!matches.length">
+            Currently no {{filterLabel == 'popular' ? 'Popular' : ''}} {{filterLabel == 'upcomming' ? 'Upcoming' : ''}} {{filterLabel == 'daysBefore' ? 'Completed' : '' }} {{filterLabel == 'In Play' ? 'tab-selected' : ''}} matches.
+        </div>
+        <ion-infinite-scroll on-infinite="loadMoreMatchesListing()" ng-if="canLoadMore" immediate-check="false" distance="1%"></ion-infinite-scroll>
+        </div>
+        </div>
+        <div class="all-listed padding" ng-if="!canLoadMore && matches.length">All {{filterLabel == 'popular' ? 'Popular' : ''}} {{filterLabel == 'upcomming' ? 'Upcoming' : ''}} {{filterLabel == 'daysBefore' ? 'Completed' : '' }} {{filterLabel == 'In Play' ? 'tab-selected' : ''}} matches listed.</div>
     </ion-content>
-</ion-view> 
+</ion-view>

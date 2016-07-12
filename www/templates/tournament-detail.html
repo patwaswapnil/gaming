@@ -1,55 +1,111 @@
 <ion-view hide-menu-button="true">
     <ion-nav-title>
-        Tri Series
     </ion-nav-title>
     <ion-content>
         <div class="cover-item-wrapper cover-detail-wrapper">
             <div class="cover-item cover-item-detail" style="background-image: url('{{tournament.details[0].img}}')">
                 <div class="cover-overlay">
                     <div class="celeb-info-detail tournament-detail">
-                        <h2 class="mb0">{{::tournament.details[0].title}}</h2>
+                        <h2 class="mb0 fz24">{{::tournament.details[0].title}}</h2>
                         <p class="mb0">{{::tournament.details[0].start_date}} to {{tournament.details[0].end_date}}</p>
                         <p class="mb0">{{::tournament.details[0].venue}}</p>
                         <p class="mb0"><a ng-click="openLink(tournament.details[0].website_link, $event)">{{::tournament.details[0].website_link}}</a></p>
-                        <h2 class="mb0 points-trade"> Total Points Traded So Far: {{::tournament.totalBets[0].total}}</h2>
+                        <h2 class="mb0 points-trade"> Total Traded Points: {{::tournament.totalBets}}</h2>
                     </div>
                 </div>
             </div>
         </div>
         <div class="wrapper title-page">
             <h2>Team Participating</h2></div>
-
-        <div class="wrapper table">
-            <div class="row header">
-                <div class="col">Team</div>
-                <div class="col">Your Trade</div>
-                <div class="col">Action</div>
-            </div>{{tournament.participating_team}}
-            <div class="row" ng-repeat="team in tournament.details[0].participating_team">
-                <div class="col">{{::team.team.post_title}}</div>
-                <div class="col">{{::tournament.pts[($index)][0].total}}</div>
-                <div class="col"><button class="trade-btn radiuz-btn" ng-click="trade()">Add Trade</button></div>
-            </div>
+        <div class="celebrity-listing listing-listing">
+            <div class="list list-listing">
+                <span class="card padding-right " ng-repeat="team in tournament.details[0].participating_team">
+  <div class="row">
+   <div class="col col-50 team-name">{{::team.team.post_title}}</div>  
+  <div class="col col-33">
+  <div ><input type="text" class="w60 match-listing-input" ng-model="points[team.team.ID]">
+ <span class="fz12 bold">+{{tournament.pts[($index)] || 0}}</span> </div>
+        </div>
+        <div class="col ">
+            <button class="radiuz-primary trade-btn pull-right" ng-click="addTrade(tournament.details[0].id, team.team.ID, points[team.team.ID], tournament.details[0].uid, category)">Trade</button>
+        </div>
+        </div>
+        </span>
+        <span class="card padding-right ">
+  <div class="row">
+   <div class="col col-50 team-name">Trade for Tie</div>  
+  <div class="col col-33">
+  <div ><input type="text" class="w60 match-listing-input" ng-model="tiePoints[$index]">
+ <span class="fz12 bold">+{{tournament.tradeTie || 0}}</span> </div>
+        </div>
+        <div class="col ">
+            <button class="radiuz-primary trade-btn pull-right" ng-click="addTrade(tournament.details[0].id, 0, tiePoints[$index], tournament.details[0].uid, category)">Trade</button>
+        </div>
+        </div>
+        </span>
+        <span class="card padding-right">
+  <div class="row">
+   <div class="col col-50 bold"> Total Traded Points:</div>  
+  <div class="col ">
+  <div > 
+ <span class="bold pull-right"> {{tournament.userTotalTrade || 0}}</span> </div>
+        </div>
+        </div>
+        </span>
+        </div>
         </div>
         <div class="wrapper title-page">
             <h2>Upcoming Matches</h2></div>
-        <div class="match-wrapper">
-            <div class="list list-listing">
-                <span class="card padding" ng-repeat="matche in  tournament.matches.details">
-         
- <h2 class="match-title fs20">{{::matche.title}}</h2> 
-  <p class="mt2">{{::matche.tournament_name.post_title}}</p> 
-      <p class="mt2">{{::matche.onlySDate}}, {{::matche.matchStartTime}} - {{::matche.matchEndTime}}</p> 
-      <p class="mt2">{{::matche.venue}}</p> 
-      <p class="mt2">Total Traded:  {{::matche.total_bets}}</p> 
-      <div class="row pl0">
-          <div class="col-60 pl0 user-trade">Your Trade: 120</div>
-          <div class="col-40 txt-right">
-          <button class="trade-btn radiuz-btn" ng-click="trade()">Add Trade</button>
-          </div>
-      </div>
-                </span>
+        <div class="mathes-wrapper">
+            <div class="celebrity-listing listing-listing">
+                <div class="list list-listing">
+                    <span class="card listing-cart-padding " ng-repeat="matches in upcomingMatch.catPost">
+  <div class="row">
+   <div class="col col-50 team-name">{{::matches.select_teams[0].team_name.post_title}}</div>  
+  <div class="col col-50">
+  <div ><input type="text" class="w60 match-listing-input" ng-model="matches.points[matches.select_teams[0].team_name.ID]">
+ <span ng-click="TradeToastInfo(matches.mytradedTotal[matches.select_teams[0].team_name.ID], matches.select_teams[0].team_name.post_title)">+{{matches.mytradedTotal[matches.select_teams[0].team_name.ID] || 0}}</span> </div>
             </div>
+        </div>
+        <div class="row">
+            <div class="col col-50 team-name">{{::matches.select_teams[1].team_name.post_title}}</div>
+            <div class="col col-50">
+                <div>
+                    <input type="text" class="w60 match-listing-input" ng-model="matches.points[matches.select_teams[1].team_name.ID]">
+                    <span ng-click="TradeToastInfo(matches.mytradedTotal[matches.select_teams[1].team_name.ID], matches.select_teams[1].team_name.post_title)">+{{matches.mytradedTotal[matches.select_teams[1].team_name.ID] || 0}}</span> </div>
+            </div>{{points}}
+        </div>
+        <div class="row">
+            <div class="col col-50 team-name">Trade For Tie</div>
+            <div class="col col-50">
+                <div>
+                    <input type="text" class="w60 match-listing-input" ng-model="matches.tie">
+                    <span ng-click="TradeToastInfo(matches.mytradedTotal.mytradedTie, 'Tie')">+{{matches.mytradedTotal.mytradedTie || 0}}</span> </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-33">
+            </div>
+            <div class="col ">
+                <button class="radiuz-primary trade-btn pull-right" ng-click="addTournamentDetailTred(matches['postLink'], matches['id'], matches.points, matches.tie, matches.uid, $index)">Trade</button>
+            </div>
+        </div>
+        <div>
+            <div class="series-name pl10 one-liner" ng-click="toastMsg(matches['tournament_name']['post_title'] +' '+ matches['venue'])">
+                {{::matches['tournament_name']['post_title']}} ({{::matches['venue']}})
+            </div>
+            <div class="series-name pl10">
+                {{::matches['onlySDate']}}&nbsp;{{::matches['matchStartTime']}} - {{::matches['matchEndTime']}}
+            </div>
+            <div class="series-name pl10 bold">
+                Total Traded Points: {{matches.mytradedTotal.tourTotal}}
+            </div>
+        </div>
+        </span>
+        </div>
+        <div ng-if="!upcomingMatch.catPost.length" class="padding">No upcoming matches found.</div>
+        <!-- <ion-infinite-scroll on-infinite="addTournamentDetailTred()" ng-if="canLoadMore" immediate-check="false" distance="1%"></ion-infinite-scroll> -->
+        </div>
         </div>
         </div>
     </ion-content>

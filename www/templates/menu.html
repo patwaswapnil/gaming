@@ -9,7 +9,7 @@
         </button>
       </ion-nav-buttons>
              <ion-nav-buttons side="right">   
-                  <button class="button button-icon button-clear ion-cash bold">400</button>
+                  <button class="button button-icon button-clear ion-cash bold header-points" ui-sref="app.buy-encash">{{userDetail.userInfo.points[0]}}</button>
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
@@ -23,8 +23,8 @@
             <div class=" ">
              Hi, {{user.data.display_name | capitalize}}
             </div>
-           <div class=""><p class="fz14 sidemenu-text"><span class="bold">400</span> Cleared points</p></div>
-           <div class=""><p class="fz14"><span class="bold">75 </span> Uncleared points</p></div>
+           <div class=""><p class="fz14 sidemenu-text"><span class="bold">{{userDetail.userInfo.points[0]}}</span> Cleared points</p></div>
+           <div class=""><p class="fz14"><span class="bold">{{userDetail.unClearedPoints || 0}} </span> Uncleared points</p></div>
   </div>
 </span> 
 </ion-header-bar>
@@ -63,24 +63,33 @@
     <i class="icon ion-android-arrow-dropright"></i>
    {{::menu.name}}
   </a>  
-          </div>
- 
+          </div>  
+ <a  class="item item-icon-left menu-item"  ng-click="toggleGroup('third')"
+                    ng-class="{active: isGroupShown('third')}" >
+    <i class="icon" ng-class="isGroupShown('third') ? 'ion-minus' : 'ion-plus'"></i>
+   My Account
+  </a> 
+          <div class="item-accordion" 
+                    ng-show="isGroupShown('third')">
+            
   <a nav-clear menu-close class="item item-icon-left menu-item" ui-sref="app.my-trades">
-    <i class="icon ion-chevron-right"></i>
+    <i class="icon ion-android-arrow-dropright"></i>
     My Trades
   </a>
   <a nav-clear menu-close class="item item-icon-left menu-item" ui-sref="app.trade-history">
-    <i class="icon ion-chevron-right"></i>
-    Trading History
+    <i class="icon ion-android-arrow-dropright"></i>
+    Trade Diffusion
   </a>
   <a nav-clear menu-close class="item item-icon-left menu-item" ui-sref="app.buy-encash">
-    <i class="icon ion-chevron-right"></i>
+    <i class="icon ion-android-arrow-dropright"></i>
     Buy/Encash Points
   </a>
   <a nav-clear menu-close class="item item-icon-left menu-item" ui-sref="app.user-profile">
-    <i class="icon ion-chevron-right"></i>
+    <i class="icon ion-android-arrow-dropright"></i>
     Edit Profile
-  </a> 
+  </a>
+          </div>
+  
   <a nav-clear menu-close class="item item-icon-left menu-item" ui-sref="app.about">
     <i class="icon ion-chevron-right"></i>
     About

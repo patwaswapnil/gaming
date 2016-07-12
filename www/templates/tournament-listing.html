@@ -1,16 +1,11 @@
 <ion-view>
     <ion-nav-title>
-        Tournaments
-    </ion-nav-title> 
-       <ion-nav-buttons side="right">   
-              <button class="button button-icon button-clear ion-cash bold">400</button> 
-                  <button class="button button-icon button-clear ion-funnel" ng-click="openTournamentFilter()"></button>
-                  
-    </ion-nav-buttons>
+        {{::category}}
+    </ion-nav-title>  
     <ion-content>
         <div class="tournament-wrapper">
         <div class="cover-item-wrapper" ng-repeat="tournament in tournaments.catPost">
-            <a ui-sref="app.tournament-detail">
+            <a ng-href="{{getSegment(tournament.postLink)}}">
                 <div class="cover-item" style="background-image:url('{{::tournament.img}}')">
                     <div class="cover-overlay">
                         <div class="cover-input-about">
@@ -26,6 +21,7 @@
                 </a>
             </div> 
         </div> 
+        <ion-infinite-scroll on-infinite="loadMoreTournaments()" ng-if="canLoadMore" immediate-check="false" distance="1%"></ion-infinite-scroll>
     </ion-content>
 </ion-view>
 <script id="templates/filter-tournament.html" type="text/ng-template">
