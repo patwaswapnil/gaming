@@ -105,7 +105,13 @@ span.badge.custom-badge {
 
 
 /* Home CSS */
-
+.banner-wrapper img{
+    height: 225px;
+    width: 100%;
+}
+.cat-scroll {
+    margin-top: -5px; 
+}
 .anchor-type-btn {
     background: white;
     color: #d4202b !important;

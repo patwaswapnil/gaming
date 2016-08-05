@@ -2,13 +2,27 @@
     <ion-nav-title>
         Event Exchange
     </ion-nav-title>
-    <ion-subheader-bar class="bar bar-subheader">
-        <ion-scroll direction="x" class="cat-scroll item ion-sc">
+    <ion-subheader-bar>
+       
+    </ion-subheader-bar>
+    <ion-content>
+            <div class="banner-wrapper">
+            <ion-slide-box auto-play="true" does-continue="true" on-slide-changed="slideChanged(index)" style="text-align:center;">
+                <ion-slide>
+                    <img ng-src="img/banner/banner1.jpg" class="img">
+                </ion-slide>
+                <ion-slide>
+                    <img ng-src="img/banner/banner2.jpeg" class="img">
+                </ion-slide>
+          <!--       <ion-slide>
+                    <img ng-src="img/banner/banner3.png" class="img">
+                </ion-slide> -->
+            </ion-slide-box>
+        </div>
+         <ion-scroll direction="x" class="cat-scroll item ion-sc">
             <a class="button radiuz-btn subheader-btn noradius cat-button" ng-class="activePanel == 'Matches' ? 'tab-selected' : ''" ng-click="toggleSection('Matches')">Popular Matches</a>
             <a class="button radiuz-btn subheader-btn noradius cat-button" ng-class="activePanel == 'Tournaments' ? 'tab-selected' : ''" ng-click="toggleSection('Tournaments')">Popular Tournaments</a>
         </ion-scroll>
-    </ion-subheader-bar>
-    <ion-content class="has-subheader">
         <div class="mathes-wrapper" ng-show="activePanel == 'Matches'">
             <div class="celebrity-listing listing-listing">
                 <div class="list list-listing">
